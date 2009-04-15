@@ -1,9 +1,10 @@
 class ExpendituresController < ApplicationController
+  before_filter :login_required
   # GET /expenditures
   # GET /expenditures.xml
   # GET /expenditures.fxml
   def index
-    @expenditures = Expenditure.find(:all)
+    @expenditures = current_user.expenditures.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb

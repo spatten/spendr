@@ -6,7 +6,7 @@ package spendr.models {
   [Resource(name="users")]
   [Bindable]
   public class User extends RxModel {
-    public static const LABEL:String = "name";
+    public static const LABEL:String = "login";
 
     public var name:String = "";
 

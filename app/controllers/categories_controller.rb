@@ -1,9 +1,10 @@
 class CategoriesController < ApplicationController
+  before_filter :login_required
   # GET /categories
   # GET /categories.xml
   # GET /categories.fxml
   def index
-    @categories = Category.find(:all)
+    @categories = current_user.categories.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
