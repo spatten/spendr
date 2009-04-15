@@ -1,0 +1,57 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+user_one:
+  id: <%= Fixtures.identify(:user_one) %>
+  name: User1NameString
+  email: User1EmailString
+  login: User1LoginString
+  crypted_password: User1CryptedPasswordString
+  salt: User1SaltString
+  remember_token: User1RememberTokenString
+  remember_token_expires_at: 2009-04-15 10:48:58
+  avatar_file_name: User1AvatarFileNameString
+  avatar_content_type: User1AvatarContentTypeString
+  avatar_file_size: 1
+  avatar_update_at: 2009-04-15 10:48:58
+
+user_two:
+  id: <%= Fixtures.identify(:user_two) %>
+  name: User2NameString
+  email: User2EmailString
+  login: User2LoginString
+  crypted_password: User2CryptedPasswordString
+  salt: User2SaltString
+  remember_token: User2RememberTokenString
+  remember_token_expires_at: 2009-04-15 10:48:58
+  avatar_file_name: User2AvatarFileNameString
+  avatar_content_type: User2AvatarContentTypeString
+  avatar_file_size: 1
+  avatar_update_at: 2009-04-15 10:48:58
+
+user_three:
+  id: <%= Fixtures.identify(:user_three) %>
+  name: User3NameString
+  email: User3EmailString
+  login: User3LoginString
+  crypted_password: User3CryptedPasswordString
+  salt: User3SaltString
+  remember_token: User3RememberTokenString
+  remember_token_expires_at: 2009-04-15 10:48:58
+  avatar_file_name: User3AvatarFileNameString
+  avatar_content_type: User3AvatarContentTypeString
+  avatar_file_size: 1
+  avatar_update_at: 2009-04-15 10:48:58
+
+user_four:
+  id: <%= Fixtures.identify(:user_four) %>
+  name: User4NameString
+  email: User4EmailString
+  login: User4LoginString
+  crypted_password: User4CryptedPasswordString
+  salt: User4SaltString
+  remember_token: User4RememberTokenString
+  remember_token_expires_at: 2009-04-15 10:48:58
+  avatar_file_name: User4AvatarFileNameString
+  avatar_content_type: User4AvatarContentTypeString
+  avatar_file_size: 1
+  avatar_update_at: 2009-04-15 10:48:58

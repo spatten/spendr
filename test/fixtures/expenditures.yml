@@ -1,0 +1,37 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+expenditure_one:
+  id: <%= Fixtures.identify(:expenditure_one) %>
+  name: Expenditure1NameString
+  description: Expenditure1DescriptionText
+  amount: 1
+  purchase_date: 2009-04-15
+  category_id: <%= Fixtures.identify(:category_one) %>
+  user_id: <%= Fixtures.identify(:user_one) %>
+
+expenditure_two:
+  id: <%= Fixtures.identify(:expenditure_two) %>
+  name: Expenditure2NameString
+  description: Expenditure2DescriptionText
+  amount: 1
+  purchase_date: 2009-04-15
+  category_id: <%= Fixtures.identify(:category_two) %>
+  user_id: <%= Fixtures.identify(:user_two) %>
+
+expenditure_three:
+  id: <%= Fixtures.identify(:expenditure_three) %>
+  name: Expenditure3NameString
+  description: Expenditure3DescriptionText
+  amount: 1
+  purchase_date: 2009-04-15
+  category_id: <%= Fixtures.identify(:category_three) %>
+  user_id: <%= Fixtures.identify(:user_three) %>
+
+expenditure_four:
+  id: <%= Fixtures.identify(:expenditure_four) %>
+  name: Expenditure4NameString
+  description: Expenditure4DescriptionText
+  amount: 1
+  purchase_date: 2009-04-15
+  category_id: <%= Fixtures.identify(:category_four) %>
+  user_id: <%= Fixtures.identify(:user_four) %>

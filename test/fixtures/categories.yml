@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+category_one:
+  id: <%= Fixtures.identify(:category_one) %>
+  name: Category1NameString
+  user_id: <%= Fixtures.identify(:user_one) %>
+
+category_two:
+  id: <%= Fixtures.identify(:category_two) %>
+  name: Category2NameString
+  user_id: <%= Fixtures.identify(:user_two) %>
+
+category_three:
+  id: <%= Fixtures.identify(:category_three) %>
+  name: Category3NameString
+  user_id: <%= Fixtures.identify(:user_three) %>
+
+category_four:
+  id: <%= Fixtures.identify(:category_four) %>
+  name: Category4NameString
+  user_id: <%= Fixtures.identify(:user_four) %>

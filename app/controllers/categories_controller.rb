@@ -1,0 +1,98 @@
+class CategoriesController < ApplicationController
+  # GET /categories
+  # GET /categories.xml
+  # GET /categories.fxml
+  def index
+    @categories = Category.find(:all)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @categories }
+      format.fxml  { render :fxml => @categories }
+    end
+  end
+
+  # GET /categories/1
+  # GET /categories/1.xml
+  # GET /categories/1.fxml
+  def show
+    @category = Category.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @category }
+      format.fxml  { render :fxml => @category }
+    end
+  end
+
+  # GET /categories/new
+  # GET /categories/new.xml
+  def new
+    @category = Category.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @category }
+    end
+  end
+
+  # GET /categories/1/edit
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  # POST /categories
+  # POST /categories.xml
+  # POST /categories.fxml
+  def create
+    @category = Category.new(params[:category])
+
+    respond_to do |format|
+      if @category.save
+        flash[:notice] = 'Category was successfully created.'
+        format.html { redirect_to(@category) }
+        format.xml  { render :xml => @category, :status => :created, :location => @category }
+        format.fxml  { render :fxml => @category }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
+        format.fxml  { render :fxml => @category.errors }
+      end
+    end
+  end
+
+  # PUT /categories/1
+  # PUT /categories/1.xml
+  # PUT /categories/1.fxml
+  def update
+    @category = Category.find(params[:id])
+    @saved = @category.update_attributes(params[:category])
+
+    respond_to do |format|
+      if @saved
+        flash[:notice] = 'Category was successfully updated.'
+        format.html { redirect_to(@category) }
+        format.xml  { head :ok }
+        format.fxml  { render :fxml => @category }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
+        format.fxml  { render :fxml => @category.errors }
+      end
+    end
+  end
+
+  # DELETE /categories/1
+  # DELETE /categories/1.xml
+  # DELETE /categories/1.fxml
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(categories_url) }
+      format.xml  { head :ok }
+      format.fxml  { render :fxml => @category }
+    end
+  end
+end
