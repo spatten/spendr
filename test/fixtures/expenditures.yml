@@ -1,37 +1,49 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-expenditure_one:
-  id: <%= Fixtures.identify(:expenditure_one) %>
-  name: Expenditure1NameString
-  description: Expenditure1DescriptionText
-  amount: 1
-  purchase_date: 2009-04-15
-  category_id: <%= Fixtures.identify(:category_one) %>
-  user_id: <%= Fixtures.identify(:user_one) %>
+quentin_tuesday_lunch:
+  name: tues lunch
+  description: lunch at Brioche.  I had the Ciopinno
+  amount: 1698
+  purchase_date: <%= 5.days.ago %>
+  category: quentin_lunch
+  user: quentin
+  
+quentin_wednesday_lunch:
+  name: wed lunch
+  description: Sushi.
+  amount: 1232
+  purchase_date: <%= 4.days.ago %>
+  category: quentin_lunch
+  user: quentin
+  
+quentin_tuesday_bus_work:
+  name: tues bus
+  description: number 3 bus down to work
+  amount: 250
+  purchase_date: <%= 5.days.ago %>
+  category: quentin_bus
+  user: quentin
 
-expenditure_two:
-  id: <%= Fixtures.identify(:expenditure_two) %>
-  name: Expenditure2NameString
-  description: Expenditure2DescriptionText
-  amount: 1
-  purchase_date: 2009-04-15
-  category_id: <%= Fixtures.identify(:category_two) %>
-  user_id: <%= Fixtures.identify(:user_two) %>
+quentin_tuesday_bus_home:
+  name: tues bus
+  description: number 3 bus down to work
+  amount: 250
+  purchase_date: <%= 5.days.ago %>
+  category: quentin_bus
+  user: quentin
 
-expenditure_three:
-  id: <%= Fixtures.identify(:expenditure_three) %>
-  name: Expenditure3NameString
-  description: Expenditure3DescriptionText
-  amount: 1
-  purchase_date: 2009-04-15
-  category_id: <%= Fixtures.identify(:category_three) %>
-  user_id: <%= Fixtures.identify(:user_three) %>
+quentin_wed_bus_work:
+  name: wed bus
+  description: number 3 bus down to work
+  amount: 250
+  purchase_date: <%= 5.days.ago %>
+  category: quentin_bus
+  user: quentin
 
-expenditure_four:
-  id: <%= Fixtures.identify(:expenditure_four) %>
-  name: Expenditure4NameString
-  description: Expenditure4DescriptionText
-  amount: 1
-  purchase_date: 2009-04-15
-  category_id: <%= Fixtures.identify(:category_four) %>
-  user_id: <%= Fixtures.identify(:user_four) %>
+quentin_wed_bus_home:
+  name: wed bus
+  description: number 3 bus down to work
+  amount: 250
+  purchase_date: <%= 5.days.ago %>
+  category: quentin_bus
+  user: quentin

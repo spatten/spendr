@@ -1,21 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-category_one:
-  id: <%= Fixtures.identify(:category_one) %>
-  name: Category1NameString
-  user_id: <%= Fixtures.identify(:user_one) %>
+quentin_coffee:
+  name: coffee
+  user: quentin
 
-category_two:
-  id: <%= Fixtures.identify(:category_two) %>
-  name: Category2NameString
-  user_id: <%= Fixtures.identify(:user_two) %>
+quentin_lunch:
+  name: lunch
+  user: quentin
 
-category_three:
-  id: <%= Fixtures.identify(:category_three) %>
-  name: Category3NameString
-  user_id: <%= Fixtures.identify(:user_three) %>
+quentin_bus:
+  name: bus
+  user: quentin
 
-category_four:
-  id: <%= Fixtures.identify(:category_four) %>
-  name: Category4NameString
-  user_id: <%= Fixtures.identify(:user_four) %>
+quentin_library_fines:
+  name: library fines
+  user: quentin
