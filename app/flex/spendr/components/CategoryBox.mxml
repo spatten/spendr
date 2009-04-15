@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" label="Category"
+  xmlns:rx="org.restfulx.components.rx.*">
+  <mx:Script><![CDATA[
+    import org.restfulx.Rx;
+    import org.restfulx.utils.RxUtils;
+    import spendr.models.Category;
+    import spendr.models.User;
+
+    [Bindable]
+    private var category:Category = new Category();
+
+    private function newCategory():void {
+      category = new Category();
+      categoriesList.selectedIndex = -1;
+    }
+
+    private function saveCategory():void {
+      updateModelProperties();
+      if (category.id) {
+        category.update({onSuccess: onCategoryUpdate});
+      } else {
+        category.create({onSuccess: onCategoryCreate});
+      }
+    }
+  
+    private function updateModelProperties():void {
+      category.name = nameTextInput.text;
+  
+      category.user = User(userComboBox.selectedItem);
+    }
+   
+    private function destroyCategory():void {
+      category.destroy({onSuccess: onCategoryDestroy});
+    }
+    
+    private function onCategorySelect():void {
+      category = RxUtils.clone(categoriesList.selectedItem) as Category;
+    }
+    
+    private function onCategoryCreate(result:Category):void {
+      category = new Category;
+    }
+    
+    private function onCategoryUpdate(result:Category):void {
+      categoriesList.selectedItem = result;
+      onCategorySelect();
+    }
+    
+    private function onCategoryDestroy(result:Category):void {
+      onCategoryCreate(result);
+    }    
+  ]]></mx:Script>
+  <mx:Panel id="categoriesPanel"
+    title="Categories" cornerRadius="0" dropShadowEnabled="false" borderStyle="solid"
+    borderThickness="1" backgroundColor="#EEEEEE" width="25%" height="100%">
+    <mx:List id="categoriesList"
+      width="100%" height="100%"
+      dataProvider="{Rx.models.index(Category)}"
+      change="onCategorySelect()"/>
+    <mx:ControlBar width="100%">
+      <mx:Button label="New Category" width="100%" height="30"
+        click="newCategory()"/>
+    </mx:ControlBar>
+  </mx:Panel>
+  <mx:Panel title="Edit Category" cornerRadius="0" dropShadowEnabled="false" borderStyle="solid"
+    borderThickness="1" backgroundColor="#EEEEEE" width="75%" height="100%">
+    <mx:Form width="100%" height="100%">
+      <mx:FormItem label="Name" width="100%">
+        <mx:TextInput id="nameTextInput" width="100%" text="{category.name}"/>
+      </mx:FormItem>
+      <mx:FormItem label="User" width="100%">
+        <mx:ComboBox id="userComboBox" width="200"
+          labelField="{User.LABEL}"
+          dataProvider="{Rx.models.index(User)}" prompt="User ..."
+          selectedItem="{category.user}"/>
+      </mx:FormItem>
+    </mx:Form>
+    <mx:ControlBar width="100%">
+      <mx:Button label="Save Category" width="50%" height="30"
+        click="saveCategory()"/>
+      <mx:Button label="Delete Category" width="50%" height="30"
+        enabled="{RxUtils.canDeleteModel(category)}"
+        click="destroyCategory()"/>
+    </mx:ControlBar>
+  </mx:Panel>
+</mx:HBox>

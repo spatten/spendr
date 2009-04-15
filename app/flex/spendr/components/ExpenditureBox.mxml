@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" label="Expenditure"
+  xmlns:rx="org.restfulx.components.rx.*">
+  <mx:Script><![CDATA[
+    import org.restfulx.Rx;
+    import org.restfulx.utils.RxUtils;
+    import spendr.models.Expenditure;
+    import spendr.models.Category;
+    import spendr.models.User;
+
+    [Bindable]
+    private var expenditure:Expenditure = new Expenditure();
+
+    private function newExpenditure():void {
+      expenditure = new Expenditure();
+      expendituresList.selectedIndex = -1;
+    }
+
+    private function saveExpenditure():void {
+      updateModelProperties();
+      if (expenditure.id) {
+        expenditure.update({onSuccess: onExpenditureUpdate});
+      } else {
+        expenditure.create({onSuccess: onExpenditureCreate});
+      }
+    }
+  
+    private function updateModelProperties():void {
+      expenditure.name = nameTextInput.text;
+      expenditure.description = descriptionTextArea.text;
+      expenditure.amount = int(amountTextInput.text);
+      expenditure.purchaseDate = purchaseDateDateField.selectedDate;
+  
+      expenditure.category = Category(categoryComboBox.selectedItem);
+      expenditure.user = User(userComboBox.selectedItem);
+    }
+   
+    private function destroyExpenditure():void {
+      expenditure.destroy({onSuccess: onExpenditureDestroy});
+    }
+    
+    private function onExpenditureSelect():void {
+      expenditure = RxUtils.clone(expendituresList.selectedItem) as Expenditure;
+    }
+    
+    private function onExpenditureCreate(result:Expenditure):void {
+      expenditure = new Expenditure;
+    }
+    
+    private function onExpenditureUpdate(result:Expenditure):void {
+      expendituresList.selectedItem = result;
+      onExpenditureSelect();
+    }
+    
+    private function onExpenditureDestroy(result:Expenditure):void {
+      onExpenditureCreate(result);
+    }    
+  ]]></mx:Script>
+  <mx:Panel id="expendituresPanel"
+    title="Expenditures" cornerRadius="0" dropShadowEnabled="false" borderStyle="solid"
+    borderThickness="1" backgroundColor="#EEEEEE" width="25%" height="100%">
+    <mx:List id="expendituresList"
+      width="100%" height="100%"
+      dataProvider="{Rx.models.index(Expenditure)}"
+      change="onExpenditureSelect()"/>
+    <mx:ControlBar width="100%">
+      <mx:Button label="New Expenditure" width="100%" height="30"
+        click="newExpenditure()"/>
+    </mx:ControlBar>
+  </mx:Panel>
+  <mx:Panel title="Edit Expenditure" cornerRadius="0" dropShadowEnabled="false" borderStyle="solid"
+    borderThickness="1" backgroundColor="#EEEEEE" width="75%" height="100%">
+    <mx:Form width="100%" height="100%">
+      <mx:FormItem label="Name" width="100%">
+        <mx:TextInput id="nameTextInput" width="100%" text="{expenditure.name}"/>
+      </mx:FormItem>
+      <mx:FormItem label="Description" width="100%">
+        <mx:TextArea id="descriptionTextArea" width="100%" height="200" text="{expenditure.description}"/>
+      </mx:FormItem>
+      <mx:FormItem label="Amount" width="100%">
+        <mx:TextInput id="amountTextInput" width="100%" text="{expenditure.amount}"/>
+      </mx:FormItem>
+      <mx:FormItem label="PurchaseDate" width="100%">
+        <mx:DateField id="purchaseDateDateField" selectedDate="{expenditure.purchaseDate}"/>
+      </mx:FormItem>
+      <mx:FormItem label="Category" width="100%">
+        <mx:ComboBox id="categoryComboBox" width="200"
+          labelField="{Category.LABEL}"
+          dataProvider="{Rx.models.index(Category)}" prompt="Category ..."
+          selectedItem="{expenditure.category}"/>
+      </mx:FormItem>
+      <mx:FormItem label="User" width="100%">
+        <mx:ComboBox id="userComboBox" width="200"
+          labelField="{User.LABEL}"
+          dataProvider="{Rx.models.index(User)}" prompt="User ..."
+          selectedItem="{expenditure.user}"/>
+      </mx:FormItem>
+    </mx:Form>
+    <mx:ControlBar width="100%">
+      <mx:Button label="Save Expenditure" width="50%" height="30"
+        click="saveExpenditure()"/>
+      <mx:Button label="Delete Expenditure" width="50%" height="30"
+        enabled="{RxUtils.canDeleteModel(expenditure)}"
+        click="destroyExpenditure()"/>
+    </mx:ControlBar>
+  </mx:Panel>
+</mx:HBox>
