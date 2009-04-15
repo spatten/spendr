@@ -1,25 +1,26 @@
 user:
-  has_many: [expenditures, categories]
-  email: string
-  name: string
-  login: string
-  crypted_password: string
-  salt: string
-  remember_token: string
-  remember_token_expires_at: datetime
-  avatar_file_name: string
-  avatar_content_type: string
-  avatar_file_size: integer
-  avatar_update_at: datetime    
+  - name: string
+  - email: string
+  - login: string
+  - crypted_password: string
+  - salt: string
+  - remember_token: string
+  - remember_token_expires_at: datetime
+  - avatar_file_name: string
+  - avatar_content_type: string
+  - avatar_file_size: integer
+  - avatar_update_at: datetime    
+  - has_many: [expenditures, categories]  
   
-expenditure:
-  belongs_to: [category, user]
-  name: string
-  description: text
-  amount: integer
-  purchase_date: date
+expenditure:  
+  - name: string
+  - description: text
+  - amount: integer
+  - purchase_date: date
+  - belongs_to: [category, user]
   
 category:
-  belongs_to: user
-  has_many: expenditures
-  name: string
+  - name: string
+  - belongs_to: user
+  - has_many: expenditures
+  
