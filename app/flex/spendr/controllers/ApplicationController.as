@@ -10,7 +10,7 @@ package spendr.controllers {
   public class ApplicationController extends RxApplicationController {
     private static var controller:ApplicationController;
     
-    public static var models:Array = []; /* Models */
+    public static var models:Array = [Category, Expenditure, User]; /* Models */
     
     public static var commands:Array = []; /* Commands */
     

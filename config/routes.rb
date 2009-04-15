@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :expenditures
+
+  map.resources :categories
+
+  map.resources :users
+
   
   # Map application root to default RestfulX controller
   map.root :controller => "flex"
