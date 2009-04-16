@@ -7,9 +7,15 @@
     <![CDATA[
       import org.restfulx.Rx;
       import spendr.controllers.ApplicationController;
+      import spendr.controllers.SpendrModel;
+      
+      [Bindable]
+      private var _model:SpendrModel = SpendrModel.instance;    
+      
 
-      private function init():void {
+      private function init():void {        
         ApplicationController.initialize();
+        _model.initialLoadCache();
       }
     ]]>
   </mx:Script>
