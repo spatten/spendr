@@ -1,25 +1,35 @@
 package spendr.controllers {
+  import org.restfulx.Rx;
+  import org.restfulx.collections.ModelsCollection;
+  import org.restfulx.events.CacheUpdateEvent;
+  
   import spendr.models.Category;
   import spendr.models.Expenditure;
-  import spendr.models.User
-
-  import mx.collections.ArrayCollection;
-  import mx.collections.XMLListCollection;
-  
-  import org.restfulx.Rx;
-  import org.restfulx.events.CacheUpdateEvent;
-  import org.restfulx.collections.ModelsCollection;
+  import spendr.models.User;
   
   [Bindable]
   public class SpendrModel {
+    private var _initialLoadCacheComplete:Boolean = false;
+    
     public var currentUser:User;
     public var categories:ModelsCollection;
     public var expenditures:ModelsCollection;
+    
+    public function initialLoadCache():void {
+      if (_initialLoadCacheComplete) return;
+      _initialLoadCacheComplete = true;
+      Rx.models.addEventListener(CacheUpdateEvent.ID, onCacheUpdate);
+      Rx.models.index(User);
+      Rx.models.index(Category);
+      Rx.models.index(Expenditure);
+    }
+    
 
     private function onCacheUpdate(event:CacheUpdateEvent):void {
       //trace("SpendrModel#onCacheUpdate: " + event.fqn);
       if (event.isFor(User)) {
-        currentUser = Rx.models.cached(User).first;
+        trace("setting current User to " + Rx.models.cached(User)[0].email)
+        currentUser = Rx.models.cached(User)[0];
       }
     }
   
