@@ -7,6 +7,19 @@ class UsersController < ApplicationController
       format.fxml {render :fxml => @users}
     end
   end
+
+  # GET /users/1
+  # GET /users/1.xml
+  # GET /users/1.fxml
+  def show
+    @user = User.find(params[:id])
+    @user = nil unless @user == current_user
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @user }
+      format.fxml  { render :fxml => @user.to_fxml(:include => {:categories => {:methods => [:expenditure_sum, :expenditure_count]}, :expenditures => {}})}
+    end
+  end
   
   # render new.rhtml
   def new
