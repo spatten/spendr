@@ -50,12 +50,12 @@
     
     private function onExpenditureCreate(result:Expenditure):void {
       expenditure = new Expenditure;
-      _model.sumExpendituresOverCategory(expenditure.category);
+      _model.sumExpendituresOverCategories();
     }
     
     private function onExpenditureUpdate(result:Expenditure):void {
       expendituresList.selectedItem = result;
-      _model.sumExpendituresOverCategory(expenditure.category);
+      _model.sumExpendituresOverCategories();
       onExpenditureSelect();
     }
     
