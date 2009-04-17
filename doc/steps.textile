@@ -200,7 +200,6 @@ Summing the expenses:
 Startup using Includes
 * in SpendrModel
 ** get rid of the onCacheUpdate calls to sumExpendituresOverCategories
-** create sumExpenditureOverCategory method
 ** get rid of the indexes in the initialization
 ** get rid of the indexes in the rest of the UI
 ** get the current_user_id in by adding it in the flashVars in flex/index.html.erb
@@ -213,6 +212,7 @@ Oops, we're missing the category stats
 * create Category#expenditure_sum and Category#expenditure_count.
 * include them in the UsersController#show fxml
 * this works, but doesn't update when you update or create an Expenditure
+* call sumExpendituresOverCategories on Expenditure update, delete and create success.
 
 h1. To Do
 
