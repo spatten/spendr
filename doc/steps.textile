@@ -1,0 +1,202 @@
+h1. Generating the app
+
+<pre>
+rails financr
+cd financr
+git init .
+git add .
+git commit -a -m "first add"
+</pre>
+
+edit @config/environment.rb@, add @config.gem 'restfulx'@
+
+<pre>
+script/generate rx_config (have to be online)
+git add .
+git commit -a -m "ran rx_config"
+</pre>
+
+create @db/model.yml@
+
+<pre>
+git add .
+git commit -a -m "adding model.yml"
+git tag 'ready_to_scaffold'
+script/generate rx_yaml_scaffold
+git commit -a -m "ran yaml_scaffold"
+rake db:refresh
+</pre>
+
+<pre>
+$> script/console
+Loading development environment (Rails 2.2.2)
+>> User.all
+>> User.first
+>> User.first.expenditures
+>> User.first.expenditure_types  
+</pre>
+
+Import the app:
+* open flex builder
+* file => import => Flex Project
+* Project folder.  browse to project
+* uncheck the checkbox of doom
+
+Run the app
+* build the Flex Project
+* run/debug settings -- point to localhost:3000/
+* script/server
+* run it
+* Show that users are blank
+* Set label in User.as, Expenditure.as and ExpenditureType.as
+* basic crud
+** change a user name
+** show it on server log
+** show it in console
+
+Tour of the Flex code
+* models
+* generated components
+* Financr.mxml
+
+Next steps:
+* restful authentication
+* FinancrModel.as
+
+installing resftul authentication
+
+http://github.com/technoweenie/restful-authentication
+
+<pre>
+cd vendor/plugins
+git clone git://github.com/technoweenie/restful-authentication.git restful_authentication
+cd ../..
+script/generate autheticated user sessions --skip-migration
+</pre>
+
+Say yes to all over-writes
+
+@rake db:refresh@
+
+
+
+In @user.rb@ add:
+<pre>
+  has_many :expenditures
+  has_many :categories
+</pre>
+
+and remove:
+
+<pre>
+  validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
+  validates_length_of       :name,     :maximum => 100  
+</pre>
+
+try logging in:
+
+@localhost:3000/login@
+
+loads up the flex app
+
+error
+
+look a the log:
+no index on users.
+
+look at swfobject in @app/views/flex/index.html.erb@
+
+add an index method to users that just sends back the current user.
+
+# move @include AuthenticatedSystem@ to @app/controllers/application.rb@
+# before_filter :login_required, :except => [:new, :create]
+# UsersController#include:
+
+<pre>
+  def index
+    @users = [current_user]
+    respond_to do |format|
+      format.fxml {render :fxml => @users}
+    end
+  end
+</pre>
+
+Run the app again.
+
+Okay, why are we getting all users?
+
+When you index expenditures or categories, you get a user on them.  It's not ever gotten, but it's a null object.
+
+In CategoriesController:
+<pre>
+  before_filter :login_required
+</pre>
+<pre>
+  def index
+    @categories = current_user.categories.find(:all)
+</pre>
+
+same in ExpendituresController
+
+The authentication stuff is automagically added to flex (the session id is sent up on every request)
+
+This causes problems if you run the app without being logged in, so require login for FlexController#index.
+
+Now we need to fix up our fixtures
+
+Leaving the addition of authentication to the rest of the controller actions for now.
+
+h1. Components
+
+The generated components have taken us about as far as they can.
+
+What we want:
+3 tabs:
+* expenditures
+** CRUD on expenditures
+* categories
+** CRUD on categories
+* account
+** CRUD on user
+
+* Copy components to the Components directory
+* Add 'xmlns:spendr="spendr.components.*"' to Spendr.mxml and change to using the spendr components
+* remove some stuff from UserBox
+
+Okay, now we need the model.
+* Create SpendrModel.as
+* Initialize it in Spendr.mxml#init (_model.initialLoadCache();)
+* This creates the onCacheUpdate callback.
+* In SpendrModel#onCacheUpdate, set the currentUser.
+* TODO: remove user dropdown from forms
+** CategoryBox:
+*** remove User combobox
+*** include the model
+*** make updateModelProperties use _model.currentUser
+** Do the same for ExpenditureBox
+
+Other ways to do this:
+# Send the user_id in the flashVars.  Do a show on the user, rather than an index.  Then, turn off UsersController#index.
+# Chain the calls.  If you need to know the user before you do any of the other calls.
+
+Summing the expenses:
+* use onCacheUpdate
+* call the sumExpendituresOverCategories for both Category and Expenditure events
+* add the Category#expenditureSum attribute.  [Ignore] it.
+
+To Do:
+# Currency formatter in _model
+# stats pane
+# file uploads
+# Do it again using includes.
+## Add the user_id in the flashVars
+## do a show on the User
+## include categories and expenditures
+## Sum the expenditures on the server, send it down as a method -- you still need ignore, but remove the onCacheUpdate calculation.
+### Not quite as good -- you don't get the magic onCacheUpdate updating of the totals!  
+#### One Solution: include the cateogry, and the sum, on the result when you make/update a new Expenditure.
+#### Better option -- do the sum, just over the current category, with the onSuccess callback from Expenditure update or create.
+# testing XML
+
+Not covered:
+* [Lazy]

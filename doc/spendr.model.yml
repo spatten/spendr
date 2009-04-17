@@ -1,0 +1,26 @@
+user:
+  - name: string
+  - email: string
+  - login: string
+  - crypted_password: string
+  - salt: string
+  - remember_token: string
+  - remember_token_expires_at: datetime
+  - avatar_file_name: string
+  - avatar_content_type: string
+  - avatar_file_size: integer
+  - avatar_update_at: datetime    
+  - has_many: [expenditures, categories]  
+  
+expenditure:  
+  - name: string
+  - description: text
+  - amount: integer
+  - purchase_date: date
+  - belongs_to: [category, user]
+  
+category:
+  - name: string
+  - belongs_to: user
+  - has_many: expenditures
+  
