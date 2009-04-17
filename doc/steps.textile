@@ -175,7 +175,18 @@ Okay, now we need the model.
 *** make updateModelProperties use _model.currentUser
 ** Do the same for ExpenditureBox
 
-Other ways to do this:
+currencyFormatter:
+* create _model.currencyFormatter
+* create _model.formattedCents
+* use _model.formattedCents in ExpenditureBox.mxml
+* convert from $ to cents before saving an expenditure.
+
+showing totals for categories:
+* add this to the CategoryBox
+* just a dataGrid
+* use the currency formatter
+
+Other ways to do the initial indexing:
 # Send the user_id in the flashVars.  Do a show on the user, rather than an index.  Then, turn off UsersController#index.
 # Chain the calls.  If you need to know the user before you do any of the other calls.
 

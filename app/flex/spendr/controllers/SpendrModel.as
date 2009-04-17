@@ -1,4 +1,6 @@
 package spendr.controllers {
+  import mx.formatters.CurrencyFormatter;
+  
   import org.restfulx.Rx;
   import org.restfulx.collections.ModelsCollection;
   import org.restfulx.events.CacheUpdateEvent;
@@ -14,14 +16,27 @@ package spendr.controllers {
     public var currentUser:User;
     public var categories:ModelsCollection;
     public var expenditures:ModelsCollection;
+    private var currencyFormatter:CurrencyFormatter;
     
     public function initialLoadCache():void {
       if (_initialLoadCacheComplete) return;
       _initialLoadCacheComplete = true;
+      setupCurrencyFormatter();
       Rx.models.addEventListener(CacheUpdateEvent.ID, onCacheUpdate);
       Rx.models.index(User);
       Rx.models.index(Category);
       Rx.models.index(Expenditure);
+    }
+    
+    private function setupCurrencyFormatter():void {
+      currencyFormatter = new CurrencyFormatter;
+      currencyFormatter.precision = 2;
+      currencyFormatter.useThousandsSeparator = true;
+      currencyFormatter.currencySymbol = "$";
+    }
+    
+    public function formattedCents(cents:int):String {
+      return currencyFormatter.format(cents / 100.0);
     }
     
     private function sumExpendituresOverCategories():void {
