@@ -197,7 +197,25 @@ Summing the expenses:
 * Add the stats panel to the CategoryBox.  Add a DataGrid to show the data.
 * Add the Category#expenditureCount attribute.  [Ignore] it.
 
-To Do:
+Startup using Includes
+* in SpendrModel
+** get rid of the onCacheUpdate calls to sumExpendituresOverCategories
+** create sumExpenditureOverCategory method
+** get rid of the indexes in the initialization
+** get rid of the indexes in the rest of the UI
+** get the current_user_id in by adding it in the flashVars in flex/index.html.erb
+** do a show on the current_user_id in SpendrModel initialization
+** in SpendrModel#onCacheUpdate for User, set categories and expenditures
+** Voila!  only one hit on the server for startup.
+
+Oops, we're missing the category stats
+
+* create Category#expenditure_sum and Category#expenditure_count.
+* include them in the UsersController#show fxml
+* this works, but doesn't update when you update or create an Expenditure
+
+h1. To Do
+
 # DONE Currency formatter in _model
 # DONE stats pane
 # file uploads
