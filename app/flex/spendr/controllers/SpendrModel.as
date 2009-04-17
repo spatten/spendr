@@ -46,6 +46,7 @@ package spendr.controllers {
     
     public function sumExpendituresOverCategory(category:Category):void {
       if (category.expenditures) { // we don't know if we have both categories and expenditures yet, so check
+        category.expenditureSum = 0;
         for (var e:int = 0 ; e < category.expenditures.length; e++)  {
           category.expenditureSum += category.expenditures[e].amount;
         }
