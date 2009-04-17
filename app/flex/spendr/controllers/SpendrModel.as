@@ -42,11 +42,13 @@ package spendr.controllers {
     private function sumExpendituresOverCategories():void {
       for (var c:int = 0 ; c < categories.length ; c++) {
         var category:Category = categories[c];
-        category.expenditureSum = 0;
+        /*category.expenditureSum = 0.0;
+        category.expenditureCount = 0;*/
         if (category.expenditures) { // we don't know if we have both categories and expenditures yet, so check
           for (var e:int = 0 ; e < category.expenditures.length; e++)  {
             category.expenditureSum += category.expenditures[e].amount;
           }
+          category.expenditureCount = category.expenditures.length;
         }
         trace(category.name + " expenditures = " + category.expenditureSum);
       }

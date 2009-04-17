@@ -91,8 +91,9 @@
   <mx:Panel id="statsPanel" title="Stats" width="25%" height="100%">
     <mx:DataGrid dataProvider="{_model.categories}">
       <mx:columns>
-        <mx:DataGridColumn dataField="name" headerText="name" width="50%"/>
-        <mx:DataGridColumn dataField="expenditureSum" headerText="Total Spent" labelFunction="{formattedCentsForDataGrid}" width="50%"/>
+        <mx:DataGridColumn dataField="name" headerText="name"/>
+        <mx:DataGridColumn dataField="expenditureSum" headerText="Total Spent" labelFunction="{formattedCentsForDataGrid}" />
+      <mx:DataGridColumn dataField="expenditureCount" headerText="#" />
       </mx:columns>
     </mx:DataGrid>
   </mx:Panel>   

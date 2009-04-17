@@ -12,6 +12,9 @@ package spendr.models {
     
     [Ignored]
     public var expenditureSum:Number = 0.0;
+    
+    [Ignored]
+    public var expenditureCount:int = 0;
 
     [BelongsTo]
     public var user:User;

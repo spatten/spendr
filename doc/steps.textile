@@ -194,6 +194,7 @@ Summing the expenses:
 * use onCacheUpdate
 * call the sumExpendituresOverCategories for both Category and Expenditure events
 * add the Category#expenditureSum attribute.  [Ignore] it.
+* Add the stats panel to the CategoryBox.  Add a DataGrid to show the data.
 
 To Do:
 # Currency formatter in _model
