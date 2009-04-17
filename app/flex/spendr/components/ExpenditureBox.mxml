@@ -7,6 +7,11 @@
     import spendr.models.Expenditure;
     import spendr.models.Category;
     import spendr.models.User;
+    import spendr.controllers.SpendrModel;
+    
+    [Bindable]
+    private var _model:SpendrModel = SpendrModel.instance;    
+    
 
     [Bindable]
     private var expenditure:Expenditure = new Expenditure();
@@ -32,7 +37,7 @@
       expenditure.purchaseDate = purchaseDateDateField.selectedDate;
   
       expenditure.category = Category(categoryComboBox.selectedItem);
-      expenditure.user = User(userComboBox.selectedItem);
+      expenditure.user = _model.currentUser;
     }
    
     private function destroyExpenditure():void {
@@ -88,12 +93,6 @@
           labelField="{Category.LABEL}"
           dataProvider="{Rx.models.index(Category)}" prompt="Category ..."
           selectedItem="{expenditure.category}"/>
-      </mx:FormItem>
-      <mx:FormItem label="User" width="100%">
-        <mx:ComboBox id="userComboBox" width="200"
-          labelField="{User.LABEL}"
-          dataProvider="{Rx.models.index(User)}" prompt="User ..."
-          selectedItem="{expenditure.user}"/>
       </mx:FormItem>
     </mx:Form>
     <mx:ControlBar width="100%">
