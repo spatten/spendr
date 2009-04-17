@@ -195,10 +195,11 @@ Summing the expenses:
 * call the sumExpendituresOverCategories for both Category and Expenditure events
 * add the Category#expenditureSum attribute.  [Ignore] it.
 * Add the stats panel to the CategoryBox.  Add a DataGrid to show the data.
+* Add the Category#expenditureCount method
 
 To Do:
-# Currency formatter in _model
-# stats pane
+# DONE Currency formatter in _model
+# DONE stats pane
 # file uploads
 # Do it again using includes.
 ## Add the user_id in the flashVars
