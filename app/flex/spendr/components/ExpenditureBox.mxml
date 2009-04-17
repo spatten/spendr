@@ -33,7 +33,7 @@
     private function updateModelProperties():void {
       expenditure.name = nameTextInput.text;
       expenditure.description = descriptionTextArea.text;
-      expenditure.amount = int(amountTextInput.text);
+      expenditure.amount = int(Number(amountTextInput.text) * 100.0);
       expenditure.purchaseDate = purchaseDateDateField.selectedDate;
   
       expenditure.category = Category(categoryComboBox.selectedItem);
@@ -83,7 +83,7 @@
         <mx:TextArea id="descriptionTextArea" width="100%" height="200" text="{expenditure.description}"/>
       </mx:FormItem>
       <mx:FormItem label="Amount" width="100%">
-        <mx:TextInput id="amountTextInput" width="100%" text="{expenditure.amount}"/>
+        <mx:TextInput id="amountTextInput" width="100%" text="{_model.formattedCents(expenditure.amount)}"/>
       </mx:FormItem>
       <mx:FormItem label="PurchaseDate" width="100%">
         <mx:DateField id="purchaseDateDateField" selectedDate="{expenditure.purchaseDate}"/>
