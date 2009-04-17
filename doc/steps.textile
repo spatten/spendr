@@ -218,15 +218,15 @@ h1. To Do
 
 # DONE Currency formatter in _model
 # DONE stats pane
+# DONE Do it again using includes.
+## DONE Add the user_id in the flashVars
+## DONE do a show on the User
+## DONE include categories and expenditures
+## DONE Sum the expenditures on the server, send it down as a method -- you still need ignore, but remove the onCacheUpdate calculation.
+### DONE Not quite as good -- you don't get the magic onCacheUpdate updating of the totals!  
+#### DONE One Solution: include the cateogry, and the sum, on the result when you make/update a new Expenditure.
+#### DONE Better option -- do the sum, just over the current category, with the onSuccess callback from Expenditure update or create.
 # file uploads
-# Do it again using includes.
-## Add the user_id in the flashVars
-## do a show on the User
-## include categories and expenditures
-## Sum the expenditures on the server, send it down as a method -- you still need ignore, but remove the onCacheUpdate calculation.
-### Not quite as good -- you don't get the magic onCacheUpdate updating of the totals!  
-#### One Solution: include the cateogry, and the sum, on the result when you make/update a new Expenditure.
-#### Better option -- do the sum, just over the current category, with the onSuccess callback from Expenditure update or create.
 # testing XML
 
 Not covered:
