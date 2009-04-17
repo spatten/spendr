@@ -9,6 +9,9 @@ package spendr.models {
     public static const LABEL:String = "name";
 
     public var name:String = "";
+    
+    [Ignored]
+    public var expenditureSum:Number = 0.0;
 
     [BelongsTo]
     public var user:User;

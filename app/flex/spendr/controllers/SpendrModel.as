@@ -24,12 +24,31 @@ package spendr.controllers {
       Rx.models.index(Expenditure);
     }
     
+    private function sumExpendituresOverCategories():void {
+      for (var c:int = 0 ; c < categories.length ; c++) {
+        var category:Category = categories[c];
+        category.expenditureSum = 0;
+        if (category.expenditures) { // we don't know if we have both categories and expenditures yet, so check
+          for (var e:int = 0 ; e < category.expenditures.length; e++)  {
+            category.expenditureSum += category.expenditures[e].amount;
+          }
+        }
+        trace(category.name + " expenditures = " + category.expenditureSum);
+      }
+    }
+    
 
     private function onCacheUpdate(event:CacheUpdateEvent):void {
       //trace("SpendrModel#onCacheUpdate: " + event.fqn);
       if (event.isFor(User)) {
         trace("setting current User to " + Rx.models.cached(User)[0].email)
         currentUser = Rx.models.cached(User)[0];
+      } else if (event.isFor(Category)) {
+        categories = Rx.models.cached(Category);
+        sumExpendituresOverCategories();
+      } else if (event.isFor(Expenditure)) {
+        expenditures = Rx.models.cached(Expenditure);
+        sumExpendituresOverCategories();
       }
     }
   
