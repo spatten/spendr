@@ -195,7 +195,7 @@ Summing the expenses:
 * call the sumExpendituresOverCategories for both Category and Expenditure events
 * add the Category#expenditureSum attribute.  [Ignore] it.
 * Add the stats panel to the CategoryBox.  Add a DataGrid to show the data.
-* Add the Category#expenditureCount method
+* Add the Category#expenditureCount attribute.  [Ignore] it.
 
 To Do:
 # DONE Currency formatter in _model
