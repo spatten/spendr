@@ -3,6 +3,7 @@
   xmlns:rx="org.restfulx.components.rx.*">
   <mx:Script><![CDATA[
     import org.restfulx.Rx;
+    import org.restfulx.utils.RxFileReference;    
     import org.restfulx.utils.RxUtils;
     import spendr.models.User;
     import spendr.controllers.SpendrModel;
@@ -13,6 +14,13 @@
 
     [Bindable]    
     private var user:User = _model.currentUser;
+    
+    public static const NO_FILE:String =  "No file selected";
+    private var _avatar:RxFileReference;
+    
+    [Bindable]
+    private var _avatarFileName:String = NO_FILE; 
+    
 
     private function saveUser():void {
       updateModelProperties();
@@ -24,11 +32,29 @@
       user.id = _model.currentUser.id;
       user.name = nameTextInput.text;
       user.email = emailTextInput.text;
-      user.login = loginTextInput.text;  
+      user.login = loginTextInput.text;
+      if(_avatar) {
+        trace("avatar set to " + _avatar + " file = " + _avatar.name);
+        user.attachment = _avatar;
+      } 
     }
        
     private function onUserUpdate(result:User):void {
     }
+    
+    private function ioErrorHandler(event:Event):void {};
+    
+    private function chooseAvatar():void {
+      _avatar = new RxFileReference("avatar");
+      _avatar.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+      _avatar.addEventListener(Event.SELECT, avatarSelected);
+      _avatar.browse();
+    }
+    
+    private function avatarSelected(event:Event):void {
+      var file:RxFileReference = RxFileReference(event.target);
+      _avatarFileName = file.name;
+    }    
     
   ]]></mx:Script>
 
@@ -43,6 +69,10 @@
       </mx:FormItem>
       <mx:FormItem label="Login" width="100%">
         <mx:TextInput id="loginTextInput" width="100%" text="{_model.currentUser.login}"/>
+      </mx:FormItem>
+      <mx:FormItem>
+        <mx:Button label="Choose avatar" useHandCursor="true" click="chooseAvatar()"/>
+        <mx:Label text="{_avatarFileName}" />
       </mx:FormItem>
     </mx:Form>
     <mx:ControlBar width="100%">

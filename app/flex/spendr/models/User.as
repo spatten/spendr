@@ -14,23 +14,14 @@ package spendr.models {
 
     public var login:String = "";
 
-    public var cryptedPassword:String = "";
+    /*public var avatarFileName:String = "";*/
 
-    public var salt:String = "";
+    /*public var avatarContentType:String = "";*/
 
-    public var rememberToken:String = "";
+    /*public var avatarFileSize:int = 0;*/
 
-    [DateTime]
-    public var rememberTokenExpiresAt:Date = new Date;
-
-    public var avatarFileName:String = "";
-
-    public var avatarContentType:String = "";
-
-    public var avatarFileSize:int = 0;
-
-    [DateTime]
-    public var avatarUpdateAt:Date = new Date;
+    /*[DateTime]*/
+    /*public var avatarUpdatedAt:Date = new Date;*/
 
     [HasMany]
     public var expenditures:ModelsCollection;

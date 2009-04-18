@@ -9,7 +9,7 @@ user:
   - avatar_file_name: string
   - avatar_content_type: string
   - avatar_file_size: integer
-  - avatar_update_at: datetime    
+  - avatar_updated_at: datetime    
   - has_many: [expenditures, categories]  
   
 expenditure:  

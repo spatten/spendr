@@ -15,3 +15,6 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+# from http://groups.google.com/group/paperclip-plugin/browse_thread/thread/7d4b61489b7e0244/fc820c3fe27a01eb?lnk=raot
+Paperclip.options[:image_magick_path] = '/opt/local/bin' 

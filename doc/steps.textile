@@ -219,7 +219,12 @@ h1. Paperclip
 <pre>
 script/plugin install git://github.com/thoughtbot/paperclip.git
 rm -rf vendor/plugins/paperclip/.git</pre>
-
+* add paperclip stuff to User.rb
+** has_attached_file
+** make paperclip stuff accessible in user (@attr_accessible@)
+* add User#avatar_thumb and User#avatar_small, send them down in UsersController#show and add them to User.as
+* Add file upload to UserBox.mxml
+* Add UsersController#update
 
 h1. To Do
 

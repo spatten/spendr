@@ -46,4 +46,27 @@ class UsersController < ApplicationController
       render :action => 'new'
     end
   end
+  
+  # PUT /users/1
+  # PUT /users/1.xml
+  # PUT /users/1.fxml
+  def update
+    @user = User.find(params[:id])
+    @user = nil unless @user == current_user
+    @saved = @user.update_attributes(params[:user])
+
+    respond_to do |format|
+      if @saved
+        flash[:notice] = 'User was successfully updated.'
+        format.html { redirect_to(@user) }
+        format.xml  { head :ok }
+        format.fxml  { render :fxml => @user }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        format.fxml  { render :fxml => @user.errors }
+      end
+    end
+  end
+  
 end
