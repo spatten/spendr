@@ -214,6 +214,13 @@ Oops, we're missing the category stats
 * this works, but doesn't update when you update or create an Expenditure
 * call sumExpendituresOverCategories on Expenditure update, delete and create success.
 
+h1. Paperclip
+
+<pre>
+script/plugin install git://github.com/thoughtbot/paperclip.git
+rm -rf vendor/plugins/paperclip/.git</pre>
+
+
 h1. To Do
 
 # DONE Currency formatter in _model
