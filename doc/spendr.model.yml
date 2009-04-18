@@ -6,10 +6,7 @@ user:
   - salt: string
   - remember_token: string
   - remember_token_expires_at: datetime
-  - avatar_file_name: string
-  - avatar_content_type: string
-  - avatar_file_size: integer
-  - avatar_updated_at: datetime    
+  - attachment_field: [avatar]  
   - has_many: [expenditures, categories]  
   
 expenditure:  

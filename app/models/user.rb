@@ -27,12 +27,15 @@ class User < ActiveRecord::Base
   
   DEFAULT_AVATAR = 'images/default_avatar.png'
   
+  # has_attached_file :avatar,
+  #   :styles => { :small => "150x150>", :thumb => "75x75>" },
+  #   :url => "images/avatars/:attachment/:id/:style_:basename.:extension",
+  #   :path => ":rails_root/public/images/avatars/:attachment/:id/:style_:basename.:extension",
+  #   :default_url => DEFAULT_AVATAR,
+  #   :whiny_thumbnails => false
+    
   has_attached_file :avatar,
-    :styles => { :small => "150x150>", :thumb => "75x75>" },
-    :url => "images/avatars/:attachment/:id/:style_:basename.:extension",
-    :path => ":rails_root/public/images/avatars/:attachment/:id/:style_:basename.:extension",
-    :default_url => DEFAULT_AVATAR,
-    :whiny_thumbnails => false
+    :styles => { :medium => "600x480>", :small => "150x150>", :thumb  => "75x75#" }
     
   def avatar_thumb
     avatar.url :thumb

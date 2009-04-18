@@ -15,16 +15,14 @@
     [Bindable]    
     private var user:User = _model.currentUser;
     
-    public static const NO_FILE:String =  "No file selected";
-    private var _avatar:RxFileReference;
-    
     [Bindable]
-    private var _avatarFileName:String = NO_FILE; 
+    private var fileName:String = "None selected";
     
+    private var file:RxFileReference;    
 
     private function saveUser():void {
       updateModelProperties();
-      _model.currentUser.update({onSuccess: onUserUpdate});
+      user.update({onSuccess: onUserUpdate});
     }
   
     private function updateModelProperties():void {
@@ -33,28 +31,35 @@
       user.name = nameTextInput.text;
       user.email = emailTextInput.text;
       user.login = loginTextInput.text;
-      if(_avatar) {
-        trace("avatar set to " + _avatar + " file = " + _avatar.name);
-        user.attachment = _avatar;
-      } 
+      user.attachment = file;
     }
        
     private function onUserUpdate(result:User):void {
     }
     
-    private function ioErrorHandler(event:Event):void {};
-    
-    private function chooseAvatar():void {
-      _avatar = new RxFileReference("avatar");
-      _avatar.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-      _avatar.addEventListener(Event.SELECT, avatarSelected);
-      _avatar.browse();
+    private function chooseFile():void {
+      file = new RxFileReference("avatar");
+      file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler, false, 0, true);
+      file.addEventListener(Event.SELECT, selectFile, false, 0, true);
+      file.addEventListener(Event.CANCEL, cancelBrowse, false, 0, true);
+      file.browse();
     }
     
-    private function avatarSelected(event:Event):void {
-      var file:RxFileReference = RxFileReference(event.target);
-      _avatarFileName = file.name;
-    }    
+    private function selectFile(event:Event):void { 
+      fileSelected(event)
+    }
+    
+    private function cancelBrowse(event:Event):void {
+      file = null;
+    }
+    
+    private function fileSelected(event:Event):void {
+      fileName = RxFileReference(event.target).name;
+    }
+    
+    private function ioErrorHandler(event:Event):void {
+      fileChooser.errorString = "Failed to selected a file. Please try again.";
+    }
     
   ]]></mx:Script>
 
@@ -70,9 +75,10 @@
       <mx:FormItem label="Login" width="100%">
         <mx:TextInput id="loginTextInput" width="100%" text="{_model.currentUser.login}"/>
       </mx:FormItem>
-      <mx:FormItem>
-        <mx:Button label="Choose avatar" useHandCursor="true" click="chooseAvatar()"/>
-        <mx:Label text="{_avatarFileName}" />
+      <mx:FormItem label="Avatar:" width="100%" id="fileChooser">
+        <mx:Button label="Browse…" id="fileBrowseButton" click="chooseFile()"/>
+        <mx:Label text="{fileName}" maxWidth="190"/>
+        <mx:Image source="{_model.currentUser.avatarThumb}"/>
       </mx:FormItem>
     </mx:Form>
     <mx:ControlBar width="100%">
