@@ -24,6 +24,24 @@ class User < ActiveRecord::Base
   
   has_many :expenditures
   has_many :categories
+  
+  DEFAULT_AVATAR = 'images/default_avatar.png'
+  
+  has_attached_file :avatar,
+    :styles => { :small => "150x150>", :thumb => "75x75>" },
+    :url => "images/avatars/:attachment/:id/:style_:basename.:extension",
+    :path => ":rails_root/public/images/avatars/:attachment/:id/:style_:basename.:extension",
+    :default_url => DEFAULT_AVATAR,
+    :whiny_thumbnails => false
+    
+  def avatar_thumb
+    avatar.url :thumb
+  end
+  
+  def avatar_small
+    avatar.url :small
+  end
+  
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #

@@ -17,7 +17,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
-      format.fxml  { render :fxml => @user.to_fxml(:include => {:categories => {:methods => [:expenditure_sum, :expenditure_count]}, :expenditures => {}})}
+      format.fxml  { render :fxml => @user.to_fxml(
+                                    :methods => [:avatar_thumb, :avatar_small],
+                                    :include => {:categories => {:methods => [:expenditure_sum, :expenditure_count]}, 
+                                                 :expenditures => {}})}
     end
   end
   

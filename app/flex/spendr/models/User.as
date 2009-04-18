@@ -38,6 +38,12 @@ package spendr.models {
     [HasMany]
     public var categories:ModelsCollection;
     
+    [Ignored]
+    public var avatarThumb:String = "";
+    
+    [Ignored]
+    public var avatarSmall:String = "";
+    
     public function User() {
       super(LABEL);
     }
