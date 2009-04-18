@@ -24,9 +24,9 @@ package spendr.controllers {
       _initialLoadCacheComplete = true;
       setupCurrencyFormatter();
       Rx.models.addEventListener(CacheUpdateEvent.ID, onCacheUpdate);
-      var _user:User = new User;
-      _user.id = Application.application.parameters.current_user_id;
-      _user.show({onSuccess: onCurrentUserShow})
+      var user:User = new User;
+      user.id = Application.application.parameters.current_user_id;
+      user.show({onSuccess: onCurrentUserShow})
     }
     
     private function onCurrentUserShow(result:Object):void {
