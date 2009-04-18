@@ -30,6 +30,7 @@ package spendr.controllers {
       controller = new ApplicationController(new SingletonEnforcer, 
         extraServices, defaultServiceId);
 			Rx.sessionToken = Application.application.parameters.session_token;
+			trace("session token = " + Rx.sessionToken);
 			Rx.authenticityToken = Application.application.parameters.authenticity_token;
     }
   }

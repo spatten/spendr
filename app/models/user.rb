@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   has_many :expenditures
   has_many :categories
   
-  DEFAULT_AVATAR = 'images/default_avatar.png'
+  DEFAULT_AVATAR = '/images/default_avatar.jpg'
   
   # has_attached_file :avatar,
   #   :styles => { :small => "150x150>", :thumb => "75x75>" },
@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
   #   :whiny_thumbnails => false
     
   has_attached_file :avatar,
-    :styles => { :medium => "600x480>", :small => "150x150>", :thumb  => "75x75#" }
+    :styles => { :medium => "600x480>", :small => "150x150>", :thumb  => "75x75#" },
+    :default_url => DEFAULT_AVATAR
     
   def avatar_thumb
     avatar.url :thumb
